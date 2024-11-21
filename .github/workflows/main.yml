@@ -56,10 +56,18 @@ jobs:
           poetry run black --check beet_observer
           poetry run isort --check-only beet_observer
       - name: Release
+        id: release
         if: |
           github.repository == 'BPR02/Observer'
           && github.event_name == 'push'
           && github.ref == 'refs/heads/main'
+        uses: python-semantic-release/python-semantic-release@v9.14.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          git_committer_name: "github-actions"
+          git_committer_email: "action@github.com"
+      - name: Publish
+        if: steps.release.outputs.released == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TWINE_USERNAME: __token__
@@ -67,6 +75,5 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "action@github.com"
-          poetry run semantic-release version
           poetry run twine upload --verbose dist/*
           poetry run semantic-release publish
