@@ -20,7 +20,7 @@ twine = "^5.1.1"
 
 [tool.semantic_release]
 branch = "main"
-version_variable = ["beet_observer/__init__.py:__version__"]
+version_variables = ["beet_observer/__init__.py:__version__"]
 version_toml = ["pyproject.toml:tool.poetry.version"]
 major_on_zero = true
 build_command = "poetry build"
