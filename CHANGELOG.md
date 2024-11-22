@@ -1,6 +1,17 @@
 # CHANGELOG
 
 
+## v0.2.1 (2024-11-22)
+
+### Bug Fixes
+
+- Remove empty overlay entries in datapack
+  ([`a3d3c96`](https://github.com/BPR02/Observer/commit/a3d3c969eda9cf485d37d81b95bafdab80c24d06))
+
+- fixes a bug that created an empty overlay field in pack.mcmeta even if there were no overlays
+  generated
+
+
 ## v0.2.0 (2024-11-22)
 
 ### Chores
