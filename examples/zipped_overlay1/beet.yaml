@@ -1,0 +1,12 @@
+data_pack:
+  load: src
+  pack_format: 57
+  supported_formats: [48,57]
+
+pipeline:
+  - beet_observer
+
+meta:
+  observer:
+    overlays:
+      - process: proc.zip
