@@ -1,0 +1,13 @@
+resource_pack:
+  load: src
+  pack_format: 42
+  supported_formats: [34,42]
+
+pipeline:
+  - beet_observer
+
+meta:
+  observer:
+    default_format: 42
+    overlays:
+      - process: proc

@@ -9,6 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 beet = ">=0.108.5"
+pillow = "^11.0.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.3"
