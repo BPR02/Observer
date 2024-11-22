@@ -1,6 +1,16 @@
 # CHANGELOG
 
 
+## v0.3.0 (2024-11-22)
+
+### Features
+
+- Generate resource pack overlays
+  ([`d0855e8`](https://github.com/BPR02/Observer/commit/d0855e8dfce7a9f82edbbc641bcc7802e196f994))
+
+- add dependency pillow
+
+
 ## v0.2.1 (2024-11-22)
 
 ### Bug Fixes
