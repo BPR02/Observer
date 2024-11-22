@@ -65,7 +65,7 @@ def gen_dp_overlays(ctx: Context, ctx_overlay: Context, overlay_dir: str) -> Non
     for overlay in ctx.data.overlays:
         # check if it's the top-level overlay
         if overlay == ctx.meta["observer"]["default_dir_dp"]:
-            # delete pack.mcmeta from overlay (requuired for tests)
+            # delete pack.mcmeta from overlay (required for tests)
             default_dir = ctx.meta["observer"]["default_dir_dp"]
             if ctx.data.overlays[default_dir].mcmeta:
                 del ctx.data.overlays[default_dir].mcmeta
@@ -91,7 +91,8 @@ def gen_dp_overlays(ctx: Context, ctx_overlay: Context, overlay_dir: str) -> Non
         )
 
     # save overlay entries in pack.mcmeta
-    ctx.data.mcmeta.data.update({"overlays": {"entries": entries}})
+    if len(entries) > 0:
+        ctx.data.mcmeta.data.update({"overlays": {"entries": entries}})
 
 
 def check_registry(
