@@ -1,6 +1,23 @@
 # CHANGELOG
 
 
+## v0.4.0 (2024-11-24)
+
+### Features
+
+- Add worldgen support ([#1](https://github.com/BPR02/Observer/pull/1),
+  [`ef2ec84`](https://github.com/BPR02/Observer/commit/ef2ec848fbfd71d0aab4d2703a979573a4649c6d))
+
+* worldgen
+
+* don't test worldgen
+
+- tests with worldgen files are broken in lectern snapshots:
+  https://github.com/mcbeet/lectern/issues/361
+
+* Update TODO.md
+
+
 ## v0.3.0 (2024-11-22)
 
 ### Features
