@@ -38,6 +38,7 @@ typeCheckingMode = "strict"
 [tool.poe.tasks]
 format = {shell = "isort beet_observer & black beet_observer"}
 check = {shell = "isort --check-only beet_observer & black --check beet_observer"}
+typing = {shell = "pyright"}
 
 [build-system]
 requires = ["poetry-core"]
