@@ -1,0 +1,6 @@
+{
+  "type": "demo:in-the-base-pack",
+  "generator": {
+    "type": "minecraft:debug"
+  }
+}

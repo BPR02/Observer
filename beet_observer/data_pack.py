@@ -1,5 +1,6 @@
 from typing import Any
 
+import beet.contrib.worldgen as wg
 from beet import Context, NamespaceProxy
 
 
@@ -47,6 +48,60 @@ def gen_dp_overlays(ctx: Context, ctx_overlay: Context, overlay_dir: str) -> Non
         (
             ctx.data.point_of_interest_type_tags,
             ctx_overlay.data.point_of_interest_type_tags,
+        ),
+        (ctx.data[wg.Dimension], ctx_overlay.data[wg.Dimension]),
+        (ctx.data[wg.DimensionType], ctx_overlay.data[wg.DimensionType]),
+        (ctx.data[wg.WorldgenBiome], ctx_overlay.data[wg.WorldgenBiome]),
+        (
+            ctx.data[wg.WorldgenConfiguredCarver],
+            ctx_overlay.data[wg.WorldgenConfiguredCarver],
+        ),
+        (
+            ctx.data[wg.WorldgenConfiguredFeature],
+            ctx_overlay.data[wg.WorldgenConfiguredFeature],
+        ),
+        (
+            ctx.data[wg.WorldgenDensityFunction],
+            ctx_overlay.data[wg.WorldgenDensityFunction],
+        ),
+        (ctx.data[wg.WorldgenNoise], ctx_overlay.data[wg.WorldgenNoise]),
+        (
+            ctx.data[wg.WorldgenNoiseSettings],
+            ctx_overlay.data[wg.WorldgenNoiseSettings],
+        ),
+        (
+            ctx.data[wg.WorldgenPlacedFeature],
+            ctx_overlay.data[wg.WorldgenPlacedFeature],
+        ),
+        (
+            ctx.data[wg.WorldgenProcessorList],
+            ctx_overlay.data[wg.WorldgenProcessorList],
+        ),
+        (ctx.data[wg.WorldgenStructure], ctx_overlay.data[wg.WorldgenStructure]),
+        (ctx.data[wg.WorldgenStructureSet], ctx_overlay.data[wg.WorldgenStructureSet]),
+        (
+            ctx.data[wg.WorldgenConfiguredSurfaceBuilder],
+            ctx_overlay.data[wg.WorldgenConfiguredSurfaceBuilder],
+        ),
+        (ctx.data[wg.WorldgenTemplatePool], ctx_overlay.data[wg.WorldgenTemplatePool]),
+        (ctx.data[wg.WorldgenWorldPreset], ctx_overlay.data[wg.WorldgenWorldPreset]),
+        (
+            ctx.data[wg.WorldgenFlatLevelGeneratorPreset],
+            ctx_overlay.data[wg.WorldgenFlatLevelGeneratorPreset],
+        ),
+        (ctx.data[wg.WorldgenBiomeTag], ctx_overlay.data[wg.WorldgenBiomeTag]),
+        (
+            ctx.data[wg.WorldgenStructureSetTag],
+            ctx_overlay.data[wg.WorldgenStructureSetTag],
+        ),
+        (ctx.data[wg.WorldgenStructureTag], ctx_overlay.data[wg.WorldgenStructureTag]),
+        (
+            ctx.data[wg.WorldgenConfiguredCarverTag],
+            ctx_overlay.data[wg.WorldgenConfiguredCarverTag],
+        ),
+        (
+            ctx.data[wg.WorldgenPlacedFeatureTag],
+            ctx_overlay.data[wg.WorldgenPlacedFeatureTag],
         ),
     ]
     # for each file type, check for required overlays
@@ -155,13 +210,18 @@ def gen_registry_overlay(
         ctx.data.overlays[default_dir][name] = registry[name]
         del registry[name]
     elif type == "addition":
-        # move function from overlay pack to overlay in build pack
+        # move file from overlay pack to overlay in build pack
         ctx.data.overlays[overlay_dir][name] = registry_overlay[name]
     else:
         # check if files are exactly the same
-        if registry[name] != registry_overlay[name]:
-            # move function from overlay pack to overlay in build pack
-            ctx.data.overlays[overlay_dir][name] = registry_overlay[name]
+        try:
+            if registry[name].data != registry_overlay[name].data:
+                # move file from overlay pack to overlay in build pack
+                ctx.data.overlays[overlay_dir][name] = registry_overlay[name]
+        except AttributeError:
+            if registry[name] != registry_overlay[name]:
+                # move file from overlay pack to overlay in build pack
+                ctx.data.overlays[overlay_dir][name] = registry_overlay[name]
 
     # remove file from overlay pack
     if name in registry_overlay:
