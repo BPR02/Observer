@@ -1,0 +1,7 @@
+data_pack:
+  load: src
+  overlays:
+    - formats:
+        min_inclusive: 48
+        max_inclusive: 48
+      directory: overlay_48

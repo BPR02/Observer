@@ -9,7 +9,7 @@ from pytest_insta import SnapshotFixture
 EXAMPLES = [
     f
     for f in os.listdir("examples")
-    if not (f.startswith("nosnap_") or f.startswith("."))
+    if not (f.endswith("_nosnap") or f.startswith("."))
 ]
 
 

@@ -1,0 +1,6 @@
+{
+  "type": "demo:in-the-overlay-pack",
+  "generator": {
+    "type": "minecraft:debug"
+  }
+}

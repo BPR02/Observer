@@ -220,7 +220,6 @@ def gen_registry_overlay(
                 ctx.data.overlays[overlay_dir][name] = registry_overlay[name]
         except AttributeError:
             if registry[name] != registry_overlay[name]:
-                print(registry[name])
                 # move file from overlay pack to overlay in build pack
                 ctx.data.overlays[overlay_dir][name] = registry_overlay[name]
 
