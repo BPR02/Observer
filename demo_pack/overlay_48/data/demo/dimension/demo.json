@@ -1,6 +1,0 @@
-{
-  "type": "demo:this-only-exists-in-the-overlay",
-  "generator": {
-    "type": "minecraft:debug"
-  }
-}
