@@ -1,6 +1,22 @@
 # CHANGELOG
 
 
+## v0.6.0 (2024-12-11)
+
+### Documentation
+
+- Update todo
+  ([`fdcf7e3`](https://github.com/BPR02/Observer/commit/fdcf7e30f48203e4620d0b344298ba1068a13b5b))
+
+- Update todo
+  ([`e28a209`](https://github.com/BPR02/Observer/commit/e28a20954c07a14db13f31ea99b7be9bb16fb909))
+
+### Features
+
+- Accept links for process location
+  ([`0306a21`](https://github.com/BPR02/Observer/commit/0306a21fb221f5f5a0616c90e3db5964db4ba6f1))
+
+
 ## v0.5.0 (2024-12-11)
 
 ### Chores
