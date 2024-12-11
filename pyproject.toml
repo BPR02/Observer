@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "beet-observer"
-version = "0.4.0"
+version = "0.5.0"
 description = "A beet plugin to automatically generate overlays from previous datapacks"
 authors = ["BPR02 <dev@bpr02.com>"]
 license = "MIT"

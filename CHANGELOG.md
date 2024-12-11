@@ -1,6 +1,29 @@
 # CHANGELOG
 
 
+## v0.5.0 (2024-12-11)
+
+### Chores
+
+- Delete demo_pack directory
+  ([`0fb8086`](https://github.com/BPR02/Observer/commit/0fb8086b62297b500888fb5f1f4f0daf4a686870))
+
+### Documentation
+
+- Add poetry installation info to contributing
+  ([`60aee3f`](https://github.com/BPR02/Observer/commit/60aee3fb858e980d7868518fdf1638118d0ead4e))
+
+### Features
+
+- Ignore overlays that exist before the plugin runs
+  ([`801bb67`](https://github.com/BPR02/Observer/commit/801bb67d10e365234f213d3db4d1bf946e7c61f0))
+
+### Testing
+
+- Rename "nester_overlay" to "subfolder_overlay"
+  ([`1d5f7eb`](https://github.com/BPR02/Observer/commit/1d5f7eb97aa8b84b8f7a98318efe975a10fb3ddc))
+
+
 ## v0.4.0 (2024-11-24)
 
 ### Features
