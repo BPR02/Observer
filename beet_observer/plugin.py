@@ -30,12 +30,14 @@ def beet_default(ctx: Context):
         save.append(overlay)
     # loop through all overlays
     for overlay in ctx.meta["observer"]["overlays"]:
-        # create relative path
-        path = f"{ctx.directory}/{overlay['process']}"
+        # get pack
+        if overlay["process"].startswith("https://"):
+            load = overlay["process"]
+        else:
+            load = f"{ctx.directory}/{overlay['process']}"
         # generate context for overlay pack
         with run_beet(
-            config={"data_pack": {"load": "."}, "resource_pack": {"load": "."}},
-            directory=path,
+            config={"data_pack": {"load": load}, "resource_pack": {"load": load}}
         ) as ctx_overlay:
             if "directory" not in overlay:
                 dp_dir = f"overlay_{ctx_overlay.data.pack_format}"
