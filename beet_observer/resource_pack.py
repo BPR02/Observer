@@ -3,7 +3,9 @@ from typing import Any
 from beet import Context, NamespaceProxy
 
 
-def gen_rp_overlays(ctx: Context, ctx_overlay: Context, overlay_dir: str) -> None:
+def gen_rp_overlays(
+    ctx: Context, ctx_overlay: Context, overlay_dir: str, ignore: list[str]
+) -> None:
     """
     Generates overlays between two resource packs.
 
@@ -46,6 +48,8 @@ def gen_rp_overlays(ctx: Context, ctx_overlay: Context, overlay_dir: str) -> Non
 
     # add overlays to pack.mcmeta
     for overlay in ctx.assets.overlays:
+        if overlay in ignore:
+            continue
         # check if it's the top-level overlay
         if overlay == ctx.meta["observer"]["default_dir_rp"]:
             # delete pack.mcmeta from overlay (required for tests)

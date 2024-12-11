@@ -4,7 +4,9 @@ import beet.contrib.worldgen as wg
 from beet import Context, NamespaceProxy
 
 
-def gen_dp_overlays(ctx: Context, ctx_overlay: Context, overlay_dir: str) -> None:
+def gen_dp_overlays(
+    ctx: Context, ctx_overlay: Context, overlay_dir: str, ignore: list[str]
+) -> None:
     """
     Generates overlays between two datapacks.
 
@@ -118,6 +120,8 @@ def gen_dp_overlays(ctx: Context, ctx_overlay: Context, overlay_dir: str) -> Non
 
     # add overlays to pack.mcmeta
     for overlay in ctx.data.overlays:
+        if overlay in ignore:
+            continue
         # check if it's the top-level overlay
         if overlay == ctx.meta["observer"]["default_dir_dp"]:
             # delete pack.mcmeta from overlay (required for tests)

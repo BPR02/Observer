@@ -24,6 +24,10 @@ def beet_default(ctx: Context):
         ctx.meta["observer"]["default_dir_rp"] = ctx.meta["observer"]["default_dir"][
             "rp"
         ]
+    # save current overlays
+    save: list[str] = []
+    for overlay in ctx.data.overlays:
+        save.append(overlay)
     # loop through all overlays
     for overlay in ctx.meta["observer"]["overlays"]:
         # create relative path
@@ -40,5 +44,5 @@ def beet_default(ctx: Context):
                 dp_dir = overlay["directory"]
                 rp_dir = overlay["directory"]
             # compare build pack and overlay pack
-            gen_dp_overlays(ctx, ctx_overlay, dp_dir)
-            gen_rp_overlays(ctx, ctx_overlay, rp_dir)
+            gen_dp_overlays(ctx, ctx_overlay, dp_dir, save)
+            gen_rp_overlays(ctx, ctx_overlay, rp_dir, save)
