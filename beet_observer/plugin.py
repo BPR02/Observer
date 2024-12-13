@@ -7,6 +7,26 @@ from .resource_pack import *
 def beet_default(ctx: Context):
     if "observer" not in ctx.meta:
         return
+
+    # # check cache
+    cache = ctx.cache["observer"]
+    cached_dp = False
+    cached_rp = False
+    dp_path = None
+    rp_path = None
+    if ctx.data:
+        dp_path = cache.get_path(f"{ctx.directory} saved_data_pack")
+        if dp_path.is_dir():
+            ctx.data.load(f"{dp_path}")
+            cached_dp = True
+    if ctx.assets:
+        rp_path = cache.get_path(f"{ctx.directory} saved_resource_pack")
+        if rp_path.is_dir():
+            ctx.assets.load(f"{rp_path}")
+            cached_rp = True
+    if cached_dp and cached_rp:
+        return
+
     # get default directories
     if "default_dir" not in ctx.meta["observer"]:
         # default dir not defined
@@ -46,5 +66,13 @@ def beet_default(ctx: Context):
                 dp_dir = overlay["directory"]
                 rp_dir = overlay["directory"]
             # compare build pack and overlay pack
-            gen_dp_overlays(ctx, ctx_overlay, dp_dir, save)
-            gen_rp_overlays(ctx, ctx_overlay, rp_dir, save)
+            if not cached_dp and ctx.data:
+                gen_dp_overlays(ctx, ctx_overlay, dp_dir, save)
+            if not cached_rp and ctx.assets:
+                gen_rp_overlays(ctx, ctx_overlay, rp_dir, save)
+
+    # save to cache
+    if not cached_dp and ctx.data:
+        ctx.data.save(path=dp_path)
+    if not cached_rp and ctx.assets:
+        ctx.assets.save(path=rp_path)
