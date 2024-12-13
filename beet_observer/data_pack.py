@@ -124,11 +124,6 @@ def gen_dp_overlays(
             continue
         # check if it's the top-level overlay
         if overlay == ctx.meta["observer"]["default_dir_dp"]:
-            # delete pack.mcmeta from overlay (required for tests)
-            default_dir = ctx.meta["observer"]["default_dir_dp"]
-            if ctx.data.overlays[default_dir].mcmeta:
-                del ctx.data.overlays[default_dir].mcmeta
-
             # get pack format from build context
             if "default_format" in ctx.meta["observer"]:
                 formats = ctx.meta["observer"]["default_format"]

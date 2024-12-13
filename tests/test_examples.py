@@ -21,4 +21,10 @@ def test_build(snapshot: SnapshotFixture, directory: str, tmp_path: Path):
     ) as ctx:
         expected: Document = snapshot("pack.md")
         actual = ctx.inject(Document)
+        for o in actual.data.overlays:
+            if actual.data.overlays[o].mcmeta:
+                del actual.data.overlays[o].mcmeta
+        for o in actual.assets.overlays:
+            if actual.assets.overlays[o].mcmeta:
+                del actual.assets.overlays[o].mcmeta
         assert actual == expected
