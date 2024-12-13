@@ -1,5 +1,6 @@
 data_pack:
   load: src
+  pack_format: 57
   overlays:
     - formats:
         min_inclusive: 48
