@@ -1,6 +1,27 @@
 # CHANGELOG
 
 
+## v0.6.1 (2024-12-13)
+
+### Chores
+
+- Update beet version
+  ([`37e1e00`](https://github.com/BPR02/Observer/commit/37e1e00838872211eca455f51846acbc2f4f2868))
+
+### Performance Improvements
+
+- Introduce caching
+  ([`10a085e`](https://github.com/BPR02/Observer/commit/10a085ebaf4a73c83a3caad742c1a3d27f0ae743))
+
+### Testing
+
+- Fix sanity test pack format
+  ([`70161ec`](https://github.com/BPR02/Observer/commit/70161ec5164f724aaddc7eef3a555616aaad80bc))
+
+- Move mcmeta deletion to tests
+  ([`7f9bf67`](https://github.com/BPR02/Observer/commit/7f9bf67fbbeb5b028e00d0b733df41e95c483574))
+
+
 ## v0.6.0 (2024-12-11)
 
 ### Documentation
