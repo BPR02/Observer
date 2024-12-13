@@ -1,6 +1,24 @@
 # CHANGELOG
 
 
+## v0.6.2 (2024-12-13)
+
+### Bug Fixes
+
+- Structure files don't need DataVersion to match
+  ([`cb19247`](https://github.com/BPR02/Observer/commit/cb192474a41f77e9de57f398877fd46a2f3aeaa7))
+
+### Code Style
+
+- Run formatter
+  ([`7af5549`](https://github.com/BPR02/Observer/commit/7af5549acf440cb9e46e590a68fddc7f83e3c45e))
+
+### Documentation
+
+- Update todo
+  ([`2a59fc0`](https://github.com/BPR02/Observer/commit/2a59fc0b2dc98abbc69e2eee92694c64b5c48956))
+
+
 ## v0.6.1 (2024-12-13)
 
 ### Chores
