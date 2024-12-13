@@ -1,7 +1,7 @@
 from typing import Any
 
 import beet.contrib.worldgen as wg
-from beet import Context, NamespaceProxy
+from beet import Context, NamespaceProxy, Structure
 
 
 def gen_dp_overlays(
@@ -214,6 +214,8 @@ def gen_registry_overlay(
     else:
         # check if files are exactly the same
         try:
+            if isinstance(registry[name],Structure):
+                registry_overlay[name].data['DataVersion'] = registry[name].data['DataVersion']
             if registry[name].data != registry_overlay[name].data:
                 # move file from overlay pack to overlay in build pack
                 ctx.data.overlays[overlay_dir][name] = registry_overlay[name]
