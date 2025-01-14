@@ -10,7 +10,7 @@
     "pack_format": 57,
     "description": "",
     "supported_formats": [
-      47,
+      44,
       57
     ]
   },
@@ -26,6 +26,13 @@
       {
         "formats": 47,
         "directory": "overlay_47"
+      },
+      {
+        "formats": {
+          "min_inclusive": 44,
+          "max_inclusive": 44
+        },
+        "directory": "overlay_44"
       }
     ]
   }
@@ -38,6 +45,18 @@
 
 ```mcfunction
 say this is the same in both
+```
+
+## Overlay `overlay_44`
+
+`@overlay overlay_44`
+
+### demo
+
+`@function demo:foo`
+
+```mcfunction
+say this is in an overlay that exists already
 ```
 
 ## Overlay `overlay_48`
@@ -76,7 +95,7 @@ say this is in an overlay that exists already
     "pack_format": 57,
     "description": "",
     "supported_formats": [
-      47,
+      44,
       57
     ]
   },

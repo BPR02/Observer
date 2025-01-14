@@ -1,12 +1,17 @@
 data_pack:
   load: src
   pack_format: 57
-  supported_formats: [47,57]
+  supported_formats: [44,57]
+  overlays:
+    - formats:
+        min_inclusive: 44
+        max_inclusive: 44
+      directory: overlay_44
 
 resource_pack:
   load: src
   pack_format: 57
-  supported_formats: [47,57]
+  supported_formats: [44,57]
 
 pipeline:
   - beet_observer

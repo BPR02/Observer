@@ -110,9 +110,6 @@ def gen_dp_overlays(
     for registry, registry_overlay in file_types:
         check_registry(ctx, ctx_overlay, overlay_dir, registry, registry_overlay)
 
-    # add current overlays to pack
-    ctx.data.overlays.merge(ctx_overlay.data.overlays)
-
     # get pack.mcmeta overlay entries
     mcmeta: dict[str, dict[str, list[dict[str, Any]]]] = ctx.data.mcmeta.data.copy()
     if "overlays" not in mcmeta:
@@ -146,6 +143,11 @@ def gen_dp_overlays(
                 "directory": overlay,
             }
         )
+
+    # add current overlays to pack
+    ctx.data.overlays.merge(ctx_overlay.data.overlays)
+    if "overlays" in ctx_overlay.data.mcmeta.data:
+        entries.extend(ctx_overlay.data.mcmeta.data["overlays"]["entries"])
 
     # save overlay entries in pack.mcmeta
     if len(entries) > 0:
