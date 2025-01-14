@@ -38,6 +38,9 @@ def gen_rp_overlays(
     for registry, registry_overlay in file_types:
         check_registry(ctx, ctx_overlay, overlay_dir, registry, registry_overlay)
 
+    # add current overlays to pack
+    ctx.assets.overlays.merge(ctx_overlay.assets.overlays)
+
     # get pack.mcmeta overlay entries
     mcmeta: dict[str, dict[str, list[dict[str, Any]]]] = ctx.assets.mcmeta.data.copy()
     if "overlays" not in mcmeta:
