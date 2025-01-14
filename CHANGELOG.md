@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.7.1 (2025-01-14)
+
+### Bug Fixes
+
+- Make nested overlays load after generated overlays
+  ([`eea04a7`](https://github.com/BPR02/Observer/commit/eea04a7121e05ea4af46a153489c1d2a2f06fd0e))
+
+
 ## v0.7.0 (2025-01-14)
 
 ### Features
