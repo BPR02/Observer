@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.7.0 (2025-01-14)
+
+### Features
+
+- Merge overlays from target pack
+  ([`7fb09e7`](https://github.com/BPR02/Observer/commit/7fb09e74ee72e741bcbd5dc2b9dd0338eeb3bd89))
+
+
 ## v0.6.2 (2024-12-13)
 
 ### Bug Fixes
