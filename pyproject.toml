@@ -36,8 +36,8 @@ profile = "black"
 typeCheckingMode = "strict"
 
 [tool.poe.tasks]
-format = {shell = "isort beet_observer & black beet_observer"}
-check = {shell = "isort --check-only beet_observer & black --check beet_observer"}
+format = {shell = "isort beet_observer & black beet_observer & pyright"}
+check = {shell = "isort --check-only beet_observer & black --check beet_observer & pyright"}
 typing = {shell = "pyright"}
 
 [build-system]
