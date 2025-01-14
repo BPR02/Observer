@@ -8,7 +8,7 @@ def beet_default(ctx: Context):
     if "observer" not in ctx.meta:
         return
 
-    # # check cache
+    # check cache
     cache = ctx.cache["observer"]
     cached_dp = False
     cached_rp = False
