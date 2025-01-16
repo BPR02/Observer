@@ -9,10 +9,11 @@ def gen_rp_overlays(
     """
     Generates overlays between two resource packs.
 
-    Keyword arguments:</br>
-    `ctx` -- the build context</br>
-    `ctx_overlay` -- the overlay context</br>
-    `overlay_dir` -- the directory of the overlay</br>
+    Keyword arguments:  \n
+    `ctx` -- the build context  \n
+    `ctx_overlay` -- the overlay context  \n
+    `overlay_dir` -- the directory of the overlay  \n
+    `ignore` -- a list of overlays to ignore (existing overlays that should not be touched)  \n
     """
     # create list of all resource pack file types
     file_types: list[tuple[NamespaceProxy[Any], NamespaceProxy[Any]]] = [
@@ -91,11 +92,11 @@ def check_registry(
     """
     Generates overlays for each namespace proxy.
 
-    Keyword arguments:</br>
-    `ctx` -- the build context</br>
-    `overlay_dir` -- the directory of the overlay</br>
-    `registry` -- the namespace proxy from the build context</br>
-    `registry_overlay` -- the namespace proxy from the overlay context</br>
+    Keyword arguments:  \n
+    `ctx` -- the build context  \n
+    `overlay_dir` -- the directory of the overlay  \n
+    `registry` -- the namespace proxy from the build context  \n
+    `registry_overlay` -- the namespace proxy from the overlay context  \n
     """
     # check each file in the build pack
     for name in list(registry):
@@ -124,15 +125,15 @@ def gen_registry_overlay(
     type: str = "",
 ) -> None:
     """
-    Checks if two functions have the same contents and generate an overlay if they don't.
+    Checks if two files have the same contents and generate an overlay if they don't.
 
-    Keyword arguments:</br>
-    `ctx` -- the build context</br>
-    `overlay_dir` -- the directory of the generated overlay</br>
-    `name` -- the name of the file</br>
-    `registry` -- the namespace proxy from the build context</br>
-    `registry_overlay` -- the namespace proxy from the overlay context</br>
-    `type` -- either "deletion" or "addition" (default: `""`)</br>
+    Keyword arguments:  \n
+    `ctx` -- the build context  \n
+    `overlay_dir` -- the directory of the generated overlay  \n
+    `name` -- the name of the file  \n
+    `registry` -- the namespace proxy from the build context  \n
+    `registry_overlay` -- the namespace proxy from the overlay context  \n
+    `type`(optional) -- either "deletion" or "addition" (default: `""`)  \n
     """
     if type == "deletion":
         # move file from build pack to overlay in build pack
