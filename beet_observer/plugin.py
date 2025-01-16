@@ -45,9 +45,12 @@ def beet_default(ctx: Context):
             "rp"
         ]
     # save current overlays
-    save: list[str] = []
+    save_dp: list[str] = []
+    save_rp: list[str] = []
     for overlay in ctx.data.overlays:
-        save.append(overlay)
+        save_dp.append(overlay)
+    for overlay in ctx.assets.overlays:
+        save_rp.append(overlay)
     # loop through all overlays
     for overlay in ctx.meta["observer"]["overlays"]:
         # get pack
@@ -67,9 +70,9 @@ def beet_default(ctx: Context):
                 rp_dir = overlay["directory"]
             # compare build pack and overlay pack
             if not cached_dp and ctx.data:
-                gen_dp_overlays(ctx, ctx_overlay, dp_dir, save)
+                gen_dp_overlays(ctx, ctx_overlay, dp_dir, save_dp)
             if not cached_rp and ctx.assets:
-                gen_rp_overlays(ctx, ctx_overlay, rp_dir, save)
+                gen_rp_overlays(ctx, ctx_overlay, rp_dir, save_rp)
 
     # save to cache
     if not cached_dp and ctx.data:
