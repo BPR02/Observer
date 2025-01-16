@@ -1,7 +1,7 @@
 from beet import Context, run_beet
 
-from .data_pack import *
-from .resource_pack import *
+from .data_pack import gen_dp_overlays
+from .resource_pack import gen_rp_overlays
 
 
 def beet_default(ctx: Context):

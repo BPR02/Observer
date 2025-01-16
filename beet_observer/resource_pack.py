@@ -36,7 +36,7 @@ def gen_rp_overlays(
     ]
     # for each file type, check for required overlays
     for registry, registry_overlay in file_types:
-        check_registry(ctx, ctx_overlay, overlay_dir, registry, registry_overlay)
+        check_registry(ctx, overlay_dir, registry, registry_overlay)
 
     # get pack.mcmeta overlay entries
     mcmeta: dict[str, dict[str, list[dict[str, Any]]]] = ctx.assets.mcmeta.data.copy()
@@ -84,7 +84,6 @@ def gen_rp_overlays(
 
 def check_registry(
     ctx: Context,
-    ctx_overlay: Context,
     overlay_dir: str,
     registry: NamespaceProxy[Any],
     registry_overlay: NamespaceProxy[Any],
@@ -94,7 +93,6 @@ def check_registry(
 
     Keyword arguments:</br>
     `ctx` -- the build context</br>
-    `ctx_overlay` -- the overlay context</br>
     `overlay_dir` -- the directory of the overlay</br>
     `registry` -- the namespace proxy from the build context</br>
     `registry_overlay` -- the namespace proxy from the overlay context</br>
