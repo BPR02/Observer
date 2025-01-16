@@ -1,6 +1,34 @@
 # CHANGELOG
 
 
+## v0.7.2 (2025-01-16)
+
+### Bug Fixes
+
+- Save dp and rp overlays separately
+  ([`43778ce`](https://github.com/BPR02/Observer/commit/43778ce3cae7e1486207e47cd6bb7807e5522f14))
+
+### Chores
+
+- Make poe commands run pyright
+  ([`c83d75a`](https://github.com/BPR02/Observer/commit/c83d75a01122dbaaa64991b3b550b7cfe425a6c3))
+
+### Code Style
+
+- Remove double comment marker
+  ([`811b8ef`](https://github.com/BPR02/Observer/commit/811b8ef114a276df9180f546046059ceab977752))
+
+### Documentation
+
+- Fix docstring line breaks and clarify a few comments
+  ([`8f76828`](https://github.com/BPR02/Observer/commit/8f768288594bf9c1461f2e3489587b392ea5f1ec))
+
+### Refactoring
+
+- Remove unused parameters and functions
+  ([`5a59e20`](https://github.com/BPR02/Observer/commit/5a59e20412f0fbed737d58ff0a8590849365b59b))
+
+
 ## v0.7.1 (2025-01-14)
 
 ### Bug Fixes
