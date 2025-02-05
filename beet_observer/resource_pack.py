@@ -8,7 +8,8 @@ def gen_rp_overlays(
     ctx: Context, ctx_overlay: Context, overlay_dir: str, ignore: list[str]
 ) -> list[PosixPath]:
     """
-    Generates overlays between two resource packs.
+    Generates overlays between two resource packs. \n
+    Returns a list of deleted files from the source pack.
 
     Keyword arguments:  \n
     `ctx` -- the build context  \n
@@ -94,7 +95,8 @@ def check_registry(
     registry_overlay: NamespaceProxy[Any],
 ) -> list[PosixPath]:
     """
-    Generates overlays for each namespace proxy.
+    Generates overlays for each namespace proxy. \n
+    Returns a list of deleted files from the source pack.
 
     Keyword arguments:  \n
     `ctx` -- the build context  \n
