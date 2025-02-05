@@ -1,3 +1,4 @@
+from pathlib import PosixPath
 from typing import Any
 
 from beet import Context, NamespaceProxy
@@ -5,7 +6,7 @@ from beet import Context, NamespaceProxy
 
 def gen_rp_overlays(
     ctx: Context, ctx_overlay: Context, overlay_dir: str, ignore: list[str]
-) -> None:
+) -> list[PosixPath]:
     """
     Generates overlays between two resource packs.
 
@@ -36,8 +37,9 @@ def gen_rp_overlays(
         (ctx.assets.atlases, ctx_overlay.assets.atlases),
     ]
     # for each file type, check for required overlays
+    deleted: list[PosixPath] = []
     for registry, registry_overlay in file_types:
-        check_registry(ctx, overlay_dir, registry, registry_overlay)
+        deleted.extend(check_registry(ctx, overlay_dir, registry, registry_overlay))
 
     # get pack.mcmeta overlay entries
     mcmeta: dict[str, dict[str, list[dict[str, Any]]]] = ctx.assets.mcmeta.data.copy()
@@ -82,13 +84,15 @@ def gen_rp_overlays(
     if len(entries) > 0:
         ctx.assets.mcmeta.data.update({"overlays": {"entries": entries}})
 
+    return deleted
+
 
 def check_registry(
     ctx: Context,
     overlay_dir: str,
     registry: NamespaceProxy[Any],
     registry_overlay: NamespaceProxy[Any],
-) -> None:
+) -> list[PosixPath]:
     """
     Generates overlays for each namespace proxy.
 
@@ -98,6 +102,9 @@ def check_registry(
     `registry` -- the namespace proxy from the build context  \n
     `registry_overlay` -- the namespace proxy from the overlay context  \n
     """
+    # prepare cache deletion list
+    deleted: list[PosixPath] = []
+
     # check each file in the build pack
     for name in list(registry):
         if name in registry_overlay:
@@ -105,6 +112,7 @@ def check_registry(
             gen_registry_overlay(ctx, overlay_dir, name, registry, registry_overlay)
         else:
             # exists only in overlay, so create a deletion overlay
+            deleted.append(registry[name].source_path)
             gen_registry_overlay(
                 ctx, overlay_dir, name, registry, registry_overlay, "deletion"
             )
@@ -114,6 +122,8 @@ def check_registry(
         gen_registry_overlay(
             ctx, overlay_dir, name, registry, registry_overlay, "addition"
         )
+
+    return deleted
 
 
 def gen_registry_overlay(

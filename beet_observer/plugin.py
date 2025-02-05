@@ -1,3 +1,5 @@
+from pathlib import PosixPath
+
 from beet import Context, run_beet
 
 from .data_pack import gen_dp_overlays
@@ -17,12 +19,52 @@ def beet_default(ctx: Context):
     if ctx.data:
         dp_path = cache.get_path(f"{ctx.directory} saved_data_pack")
         if dp_path.is_dir():
-            ctx.data.load(f"{dp_path}")
+            # get files that were moved to an overlay
+            with open(f"{dp_path}/deleted.txt", mode="r") as del_list:
+                deleted = del_list.read().splitlines()
+
+            # delete files that were moved to an overlay
+            for target in deleted:
+                # get file location
+                target_path = PosixPath(target)
+                folders = target_path.parts
+                ext = "." + folders[-1].split(".")[-1]
+                loc = f"{folders[1]}:{folders[-1].removesuffix(ext)}"
+                # get resource location
+                for location, resource in ctx.data.all(loc):
+                    p = str(resource.source_path)  # type: ignore
+                    resource_path = PosixPath((p[p.find("/data/") + 1 :]))
+                    # delete resource from pack
+                    if target_path == resource_path:
+                        del ctx.data[type(resource)][location]
+
+            # add overlays to pack
+            ctx.data.load(f"{dp_path}/pack")
             cached_dp = True
     if ctx.assets:
         rp_path = cache.get_path(f"{ctx.directory} saved_resource_pack")
         if rp_path.is_dir():
-            ctx.assets.load(f"{rp_path}")
+            # get files that were moved to an overlay
+            with open(f"{rp_path}/deleted.txt", mode="r") as del_list:
+                deleted = del_list.read().splitlines()
+
+            # delete files that were moved to an overlay
+            for target in deleted:
+                # get file location
+                target_path = PosixPath(target)
+                folders = target_path.parts
+                ext = "." + folders[-1].split(".")[-1]
+                loc = f"{folders[1]}:{folders[-1].removesuffix(ext)}"
+                # get resource location
+                for location, resource in ctx.assets.all(loc):
+                    p = str(resource.source_path)  # type: ignore
+                    resource_path = PosixPath((p[p.find("/assets/") + 1 :]))
+                    # delete resource from pack
+                    if target_path == resource_path:
+                        del ctx.assets[type(resource)][location]
+
+            # add overlays to pack
+            ctx.assets.load(f"{rp_path}/pack")
             cached_rp = True
     if cached_dp and cached_rp:
         return
@@ -52,6 +94,8 @@ def beet_default(ctx: Context):
     for overlay in ctx.assets.overlays:
         save_rp.append(overlay)
     # loop through all overlays
+    deleted_dp: list[PosixPath] = []
+    deleted_rp: list[PosixPath] = []
     for overlay in ctx.meta["observer"]["overlays"]:
         # get pack
         if overlay["process"].startswith("https://"):
@@ -70,12 +114,18 @@ def beet_default(ctx: Context):
                 rp_dir = overlay["directory"]
             # compare build pack and overlay pack
             if not cached_dp and ctx.data:
-                gen_dp_overlays(ctx, ctx_overlay, dp_dir, save_dp)
+                deleted_dp = gen_dp_overlays(ctx, ctx_overlay, dp_dir, save_dp)
             if not cached_rp and ctx.assets:
-                gen_rp_overlays(ctx, ctx_overlay, rp_dir, save_rp)
+                deleted_rp = gen_rp_overlays(ctx, ctx_overlay, rp_dir, save_rp)
 
     # save to cache
     if not cached_dp and ctx.data:
-        ctx.data.save(path=dp_path)
+        ctx.data.save(path=f"{dp_path}/pack")
+        with open(f"{dp_path}/deleted.txt", mode="x") as file:
+            for s in deleted_dp:
+                file.write(str(s)[str(s).find("/data/") + 1 :] + "\n")
     if not cached_rp and ctx.assets:
-        ctx.assets.save(path=rp_path)
+        ctx.assets.save(path=f"{rp_path}/pack")
+        with open(f"{rp_path}/deleted.txt", mode="x") as file:
+            for s in deleted_rp:
+                file.write(str(s)[str(s).find("/assets/") + 1 :] + "\n")
