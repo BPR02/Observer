@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.7.3 (2025-02-05)
+
+### Bug Fixes
+
+- (#2) caches now track deleted files
+  ([`b303a3c`](https://github.com/BPR02/Observer/commit/b303a3cd0d8e2f396d5e9ddebb1c171d1c04c8ad))
+
+
 ## v0.7.2 (2025-01-16)
 
 ### Bug Fixes
